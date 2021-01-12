@@ -1,27 +1,49 @@
 package com.cybertek.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@MappedSuperclass
 @Setter
 @Getter
-@ToString
-@MappedSuperclass
+@NoArgsConstructor
+@AllArgsConstructor
 public class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false,updatable = false)
     private LocalDateTime insertDateTime;
+    @Column(nullable = false,updatable = false)
     private Long insertUserId;
+    @Column(nullable = false)
     private LocalDateTime lastUpdateDateTime;
+    @Column(nullable = false)
     private Long lastUpdateUserId;
+
+
+    private Boolean isDeleted=false;
+
+    @PrePersist
+    public void onPrePersisit(){
+        insertDateTime = LocalDateTime.now();
+        lastUpdateDateTime = LocalDateTime.now();
+        insertUserId = 1l;
+        lastUpdateUserId = 1l;
+    }
+
+    @PreUpdate
+    public void onPreUpdate(){
+        lastUpdateDateTime = LocalDateTime.now();
+        lastUpdateUserId = 1l;
+    }
+
 
 }

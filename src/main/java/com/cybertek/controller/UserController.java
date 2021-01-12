@@ -13,16 +13,19 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    RoleService roleService;
+    private UserService userService;
+
     @Autowired
-    UserService userService;
+    private RoleService roleService;
+
+
 
     @GetMapping("/create")
     public String createUser(Model model){
 
         model.addAttribute("user", new UserDTO());
-        model.addAttribute("roles",roleService.listAllRoles());
-        model.addAttribute("users", userService.listAllUser());
+        model.addAttribute("roles",roleService.findAllRoles());
+        model.addAttribute("users", userService.findAllUsers());
 
         return "/user/create";
     }
@@ -39,8 +42,8 @@ public class UserController {
     public String editUser(@PathVariable("username") String username,Model model){
 
         model.addAttribute("user",userService.findByUserName(username));
-        model.addAttribute("roles",roleService.listAllRoles());
-        model.addAttribute("users", userService.listAllUser());
+        model.addAttribute("roles",roleService.findAllRoles());
+        model.addAttribute("users", userService.findAllUsers());
 
         return "/user/update";
     }

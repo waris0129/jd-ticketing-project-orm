@@ -78,10 +78,12 @@
                                                 <td th:text="${project.projectName}"></td>
                                                 <td th:text="${project.projectStartDate+' to '+project.projectEndDate}"></td>
                                                 <td th:text="${project.assignedManager.firstName+' '+project.assignedManager.lastName}"></td>
-                                                <td th:text="${project.unfinishedProject}+' / '+${project.completedProject}"></td>
-                                                <td th:text="${project.status}"></td>
+                                                <td th:text="${project.unfinishedTaskCounts}+' / '+${project.completeTaskCounts}"></td>
+                                                <td th:text="${project.projectStatus}"></td>
                                                 <td>
-                                                    <a><button type="button" class="btn btn-info rounded-0">Complete</button></a>
+                                                    <a th:if="${project.unfinishedTaskCounts==0&&project.completeTaskCounts>0}"><button type="button" class="btn btn-info rounded-0">Complete</button></a>
+                                                    <a th:if="${project.unfinishedTaskCounts==0&&project.completeTaskCounts==0}"><button type="button" class="btn btn-info rounded-0" disabled>Complete</button></a>
+                                                    <a th:if="${project.unfinishedTaskCounts>0 && project.completeTaskCounts>=0}"><button type="button" class="btn btn-info rounded-0" disabled>Complete</button></a>
                                                 </td>
                                             </tr>
                                             </tbody>

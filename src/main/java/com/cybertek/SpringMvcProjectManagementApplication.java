@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
+import javax.annotation.PostConstruct;
+
 @SpringBootApplication // include @Configuration annotation
 public class SpringMvcProjectManagementApplication {
 
@@ -14,10 +16,9 @@ public class SpringMvcProjectManagementApplication {
 	}
 
 	@Bean
-	public ModelMapper modelMapper(){ // config style bean, create ModelMapper object while app initiated
+	public ModelMapper modelMapper(){
 		return new ModelMapper();
 	}
-
 
 
 }

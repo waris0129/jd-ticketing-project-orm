@@ -9,17 +9,14 @@ import org.springframework.stereotype.Component;
 
 @Component
 @ConfigurationPropertiesBinding
-public class UserDTOConverter implements Converter<String, UserDTO> {
+public class UserConverter implements Converter<String, UserDTO> {
 
     @Autowired
     private UserService userService;
 
-    public static String username;
 
     @Override
     public UserDTO convert(String username) {
-        UserDTO user = userService.findByUserName(username);
-        return user;
+        return userService.findByUserName(username);
     }
-
 }

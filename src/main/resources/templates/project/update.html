@@ -56,6 +56,7 @@
                                                 <div class="form-group">
                                                     <label>Assigned Manager</label>
                                                     <select class="custom-select" required="required" th:field="*{assignedManager}">
+                                                        <option th:selected="${project.assignedManager}" th:value="${project.assignedManager.username}" th:text="${project.assignedManager.firstName+' '+project.assignedManager.lastName}"></option>
                                                         <option th:each="each: ${managers}" th:value="${each.username}" th:text="${each.firstName+' '+each.lastName }"></option>
                                                     </select>
                                                     <div class="invalid-feedback">Please choose manager</div>
@@ -134,7 +135,7 @@
                                                 <td th:text="${each.projectName}"></td>
                                                 <td th:text="${each.projectStartDate + ' / '+each.projectEndDate}"></td>
                                                 <td th:text="${each.getAssignedManager().role.description}"></td>
-                                                <td th:text="${each.status}"></td>
+                                                <td th:text="${each.projectStatus}"></td>
                                                 <td>
                                                     <a ><button disabled type="button" class="btn btn-warning btn-sm">Update</button></a>
                                                     <a ><button disabled type="button" class="btn btn-danger btn-sm">Delete</button></a>

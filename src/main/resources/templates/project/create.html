@@ -57,7 +57,7 @@
                                                     <label>Assigned Manager</label>
                                                     <select class="custom-select" required="required" th:field="*{assignedManager}">
                                                         <option th:value=" ''" th:text="Select"></option>
-                                                        <option th:each="each: ${managers}" th:value="${each.username}" th:text="${each.lastName+' '+each.lastName}"></option>
+                                                        <option th:each="each: ${managers}" th:value="${each.username}" th:text="${each.firstName+' '+each.lastName}"></option>
                                                     </select>
                                                     <div class="invalid-feedback">Please choose manager</div>
                                                 </div>
@@ -106,7 +106,6 @@
                 </div>
 
 
-
                 <!-- ------------------------TABLE START----------------------------- -->
 
                 <div class="row">
@@ -135,7 +134,7 @@
                                                 <td th:text="${each.projectName}"></td>
                                                 <td th:text="${each.projectStartDate + ' / '+each.projectEndDate}"></td>
                                                 <td th:text="${each.getAssignedManager().firstName+' '+each.getAssignedManager().lastName}"></td>
-                                                <td th:text="${each.status}"></td>
+                                                <td th:text="${each.projectStatus}"></td>
                                                 <td>
                                                     <a th:href="@{/project/update/{id}(id = ${each.getProjectCode()})}" ><button type="button" class="btn btn-warning btn-sm">Update</button></a>
                                                     <a th:href="@{/project/delete/{id}(id=${each.getProjectCode()})}"><button type="button" class="btn btn-danger btn-sm">Delete</button></a>
